@@ -244,7 +244,7 @@ fun ErrorDialog(
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Error") },
+        title = { Text("Required") },
         text = { Text(message) },
         confirmButton = {
             TextButton(onClick = onDismiss) {

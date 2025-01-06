@@ -81,5 +81,8 @@ dependencies {
     // Image Loading
     implementation(libs.coil.compose)
 
+    //Splash API
+    implementation(libs.androidx.core.splashscreen)
+
 
 }

@@ -92,7 +92,7 @@ fun PriceTag(
                 text = buildAnnotatedString {
                     withStyle(
                         SpanStyle(
-                            fontSize = 14.sp,
+                            fontSize = 12.sp,
                             fontWeight = FontWeight.Normal,
                             color = MaterialTheme.colorScheme.onSurface
                         )
@@ -101,12 +101,12 @@ fun PriceTag(
                     }
                     withStyle(
                         SpanStyle(
-                            fontSize = 18.sp,
+                            fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onSurface
                         )
                     ) {
-                        append(String.format("%.2f", price))
+                        append("$price")
                     }
                 }
             )
