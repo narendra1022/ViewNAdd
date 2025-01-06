@@ -10,6 +10,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,6 +19,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.example.swipe.viewmodels.ProductViewModel
 
 @Composable
@@ -30,6 +35,11 @@ fun ProductListScreen(
     val errorMessage by viewModel.errorMessage.collectAsState(initial = null)
 
     var isSearchExpanded by remember { mutableStateOf(false) }
+
+
+    LaunchedEffect(Unit) {
+        viewModel.loadProducts()
+    }
 
     Scaffold(
         floatingActionButton = {

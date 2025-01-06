@@ -13,6 +13,10 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.io.IOException
+import java.net.ConnectException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -54,7 +58,7 @@ class ProductViewModel @Inject constructor(
             try {
                 repository.getProducts()
                     .catch { e ->
-                        _errorMessage.value = e.message ?: "Unknown error occurred"
+                        _errorMessage.value = getErrorMessage(e)
                         _isLoading.value = false
                     }
                     .collect { result ->
@@ -62,12 +66,12 @@ class ProductViewModel @Inject constructor(
                             _products.value = products
                             _errorMessage.value = null
                         }.onFailure { e ->
-                            _errorMessage.value = e.message ?: "Failed to load products"
+                            _errorMessage.value = getErrorMessage(e)
                         }
                         _isLoading.value = false
                     }
             } catch (e: Exception) {
-                _errorMessage.value = e.message ?: "Failed to load products"
+                _errorMessage.value = getErrorMessage(e)
                 _isLoading.value = false
             }
         }
@@ -77,4 +81,13 @@ class ProductViewModel @Inject constructor(
         _searchQuery.value = query
     }
 
+    private fun getErrorMessage(throwable: Throwable): String {
+        return when (throwable) {
+            is UnknownHostException -> "No internet connection"
+            is SocketTimeoutException -> "Connection timed out"
+            is ConnectException -> "No internet connection"
+            is IOException -> "Network error occurred"
+            else -> throwable.message ?: "Unknown error occurred"
+        }
+    }
 }

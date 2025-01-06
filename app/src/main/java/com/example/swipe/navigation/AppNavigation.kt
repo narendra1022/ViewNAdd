@@ -20,7 +20,9 @@ fun AppNavigation() {
             )
         }
         composable(Routes.AddProduct.route) {
-            AddProductScreen()
+            AddProductScreen(
+                navController = navController
+            )
         }
     }
 }
