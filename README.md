@@ -1,4 +1,4 @@
-# ViewNAdd App
+## ViewNAdd App
  The app consists of two primary screens: a Product Listing Screen and an Add Product Screen. It adheres to the latest Android development best practices and incorporates modern technologies.
 
 ---
