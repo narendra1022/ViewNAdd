@@ -15,11 +15,13 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import javax.inject.Inject
 
+
 class ProductRepository @Inject constructor(
     private val api: ProductApi,
     @ApplicationContext private val context: Context
 ) {
-    suspend fun getProducts(): Flow<Result<List<Product>>> = flow {
+
+    fun getProducts(): Flow<Result<List<Product>>> = flow {
         try {
             val response = api.getProducts()
             emit(Result.success(response))
@@ -28,7 +30,7 @@ class ProductRepository @Inject constructor(
         }
     }
 
-    suspend fun addProduct(
+    fun addProduct(
         productName: String,
         productType: String,
         price: Double,
@@ -57,5 +59,7 @@ class ProductRepository @Inject constructor(
         } catch (e: Exception) {
             emit(Result.failure(e))
         }
+
+
     }
 }

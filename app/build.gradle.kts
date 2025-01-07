@@ -84,5 +84,4 @@ dependencies {
     //Splash API
     implementation(libs.androidx.core.splashscreen)
 
-
 }

@@ -13,10 +13,6 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import java.io.IOException
-import java.net.ConnectException
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -79,15 +75,5 @@ class ProductViewModel @Inject constructor(
 
     fun updateSearchQuery(query: String) {
         _searchQuery.value = query
-    }
-
-    private fun getErrorMessage(throwable: Throwable): String {
-        return when (throwable) {
-            is UnknownHostException -> "No internet connection"
-            is SocketTimeoutException -> "Connection timed out"
-            is ConnectException -> "No internet connection"
-            is IOException -> "Network error occurred"
-            else -> throwable.message ?: "Unknown error occurred"
-        }
     }
 }

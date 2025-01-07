@@ -51,7 +51,7 @@ fun AddProductScreen(
                     images
                 )
                 scope.launch {
-                    delay(1500)
+                    delay(2000)
                     navController.popBackStack()
                 }
 

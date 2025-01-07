@@ -25,10 +25,11 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .client(
                 OkHttpClient.Builder()
-                .addInterceptor(HttpLoggingInterceptor().apply {
-                    level = HttpLoggingInterceptor.Level.BODY
-                })
-                .build())
+                    .addInterceptor(HttpLoggingInterceptor().apply {
+                        level = HttpLoggingInterceptor.Level.BODY
+                    })
+                    .build()
+            )
             .build()
     }
 
@@ -43,4 +44,6 @@ object NetworkModule {
     fun provideContext(@ApplicationContext context: Context): Context {
         return context
     }
+
+
 }
